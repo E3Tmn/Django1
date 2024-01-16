@@ -81,7 +81,7 @@
           <span class="sr-only">Loading...</span>
         </div>
       </div>
-
+      {% verbatim %}
       <div class="place-description" v-if="selectedPlace">
 
         <img v-if="mainPhotoSrc" v-bind:src="mainPhotoSrc" class="d-block shadow mb-3 rounded" v-bind:alt="selectedPlace.title">
@@ -114,7 +114,7 @@
             </a>
           </template>
         </div>
-
+        {% endverbatim %}
         <div v-html="selectedPlace.long_description"></div>
       </div>
     </div>
