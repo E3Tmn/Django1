@@ -16,7 +16,7 @@ class Image(models.Model):
                                on_delete=models.CASCADE, 
                                null=True,
                                related_name='images')
-    picture = models.ImageField("Картинка", blank=True)
+    picture = models.ImageField("Картинка", blank=True, upload_to='media/')
 
     def __str__(self):
         return f'{self.id} - {self.place.title}'
