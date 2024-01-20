@@ -8,6 +8,7 @@ from django.utils.html import format_html
 class ImageInline(admin.TabularInline):
     model = Image
     readonly_fields = ['preview_image']
+    ordering = ("serial_number",)
     def preview_image(self, obj):
         url = obj.picture.url
         return format_html(f'<img src="{url}" height="200px" />')

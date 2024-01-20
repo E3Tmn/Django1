@@ -17,6 +17,7 @@ class Image(models.Model):
                                null=True,
                                related_name='images')
     picture = models.ImageField("Картинка", blank=True, upload_to='media/')
+    serial_number = models.IntegerField("Порядковый номер", null=True, db_index=True)
 
     def __str__(self):
         return f'{self.id} - {self.place.title}'
