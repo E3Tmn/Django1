@@ -1,6 +1,6 @@
 # Сайт экскурсионных услуг
 На сайте отображается карта, на которой указаны местоположения компаний, предоставляющих экскурсионные услуги, а так же информация об этих компаниях.
-http://e3tmn.pythonanywhere.com/
+https://e3tmn.pythonanywhere.com/
 ## Запуск
 1. Скачайте проект
 2. Установите зависимости командой `pip install -r requirements.txt`
@@ -13,3 +13,8 @@ http://e3tmn.pythonanywhere.com/
 - `DEBUG` — дебаг-режим. Поставьте True, чтобы увидеть отладочную информацию в случае ошибки.
 - `SECRET_KEY` — секретный ключ проекта
 - `ALLOWED_HOSTS` — см документацию Django.
+## Добавление локации на карту
+```
+python manage.py load_place http://адрес/файла.json
+```
+[Пример файла JSON.](https://raw.githubusercontent.com/devmanorg/where-to-go-places/master/places/Генератор%20Маркса%20или%20«Катушка%20Тесла».json)
