@@ -19,10 +19,9 @@ class Image(models.Model):
         'Place',
         on_delete=models.CASCADE,
         verbose_name='Место',
-        null=True,
         related_name='images'
     )
-    picture = models.ImageField("Картинка", blank=True, upload_to='media/')
+    picture = models.ImageField("Картинка", upload_to='media/')
     serial_number = models.PositiveIntegerField(
         "Порядковый номер",
         null=True,
