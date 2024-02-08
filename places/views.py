@@ -11,8 +11,8 @@ def place_page(request, place_id):
     json_response = {
         "title": place.title,
         "imgs": [],
-        "description_short": place.description_short,
-        "description_long": place.description_long,
+        "description_short": place.short_description,
+        "description_long": place.long_description,
         "coordinates": {
             "lng": place.long,
             "lat": place.lat
