@@ -7,10 +7,9 @@ from places.models import Place, Image
 
 def place_page(request, place_id):
     place = get_object_or_404(Place, id=place_id)
-    images = Image.objects.filter(place=place)
     json_response = {
         "title": place.title,
-        "imgs": [image.picture.url for image in images],
+        "imgs": [image.picture.url for image in place.images.all()],
         "description_short": place.short_description,
         "description_long": place.long_description,
         "coordinates": {
