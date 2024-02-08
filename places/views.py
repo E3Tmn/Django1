@@ -1,13 +1,13 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.urls import reverse
 
-from places.models import Place, Image
+from places.models import Place
 
 
 def place_page(request, place_id):
     place = get_object_or_404(Place, id=place_id)
-    json_response = {
+    response = {
         "title": place.title,
         "imgs": [image.picture.url for image in place.images.all()],
         "description_short": place.short_description,
@@ -19,7 +19,7 @@ def place_page(request, place_id):
     }
 
     return JsonResponse(
-        json_response,
+        response,
         json_dumps_params={
             'ensure_ascii': False,
             'indent': 2
