@@ -10,7 +10,7 @@ def place_page(request, place_id):
     images = Image.objects.filter(place=place)
     json_response = {
         "title": place.title,
-        "imgs": [],
+        "imgs": [image.picture.url for image in images],
         "description_short": place.short_description,
         "description_long": place.long_description,
         "coordinates": {
@@ -18,8 +18,6 @@ def place_page(request, place_id):
             "lat": place.lat
         }
     }
-    for image in images:
-        json_response['imgs'].append(image.picture.url)
 
     return JsonResponse(
         json_response,
@@ -33,25 +31,26 @@ def place_page(request, place_id):
 def index_page(request):
     db_places = Place.objects.all()
     places = {
-      "type": "FeatureCollection",
-      "features": []
+        "type": "FeatureCollection",
+        "features":
+        [
+            {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [place.long, place.lat]
+                },
+                "properties": {
+                    "title": place.title,
+                    "placeId": place.id,
+                    "detailsUrl": reverse(
+                        place_page,
+                        kwargs={'place_id': place.id}
+                    )
+                }
+            } for place in db_places
+        ]
     }
-    for place in db_places:
-        places['features'].append({
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [place.long, place.lat]
-            },
-            "properties": {
-                "title": place.title,
-                "placeId": place.id,
-                "detailsUrl": reverse(
-                    place_page,
-                    kwargs={'place_id': place.id}
-                )
-            }
-        })
 
     data = {'places': places}
     return render(request, 'index.html', context=data)
