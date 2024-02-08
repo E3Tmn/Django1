@@ -13,7 +13,7 @@ class ImageInline(SortableStackedInline):
 
     def get_preview_image(self, obj):
         url = obj.picture.url
-        return format_html(f'<img src="{url}" height="200px" />')
+        return format_html('<img src="{}" height="200px" />', url)
 
 
 @admin.register(Place)
