@@ -2,6 +2,7 @@ from django.db import models
 
 from tinymce.models import HTMLField
 
+
 # Create your models here.
 class Place(models.Model):
     title = models.CharField("Название", max_length=200)
@@ -12,14 +13,21 @@ class Place(models.Model):
 
     def __str__(self):
         return self.title
-    
+
+
 class Image(models.Model):
-    place = models.ForeignKey('Place', 
-                               on_delete=models.CASCADE, 
-                               null=True,
-                               related_name='images')
+    place = models.ForeignKey(
+        'Place',
+        on_delete=models.CASCADE,
+        null=True,
+        related_name='images'
+    )
     picture = models.ImageField("Картинка", blank=True, upload_to='media/')
-    serial_number = models.PositiveIntegerField("Порядковый номер", null=True, db_index=True)
+    serial_number = models.PositiveIntegerField(
+        "Порядковый номер",
+        null=True,
+        db_index=True
+    )
 
     def __str__(self):
         return f'{self.id} - {self.place.title}'
